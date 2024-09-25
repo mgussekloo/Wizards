@@ -8,7 +8,7 @@ local systems = require 'lib.systems'
 local Wizard = require 'classes.wizard'
 
 local cam = gamera.new(0,0,2000,2000)
--- cam:setScale(2.0)
+cam:setScale(2.0)
 
 
 function love.load()
