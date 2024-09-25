@@ -1,38 +1,41 @@
 local System = require 'knife.system'
+local Event = require 'knife.event'
+local gamera = require 'lib.gamera'
 
-local entities = require 'entities'
-local Wizard = require 'wizard'
+local entities = require 'lib.entities'
+local systems = require 'lib.systems'
+
+local Wizard = require 'classes.wizard'
+
+local cam = gamera.new(0,0,2000,2000)
+-- cam:setScale(2.0)
+
 
 function love.load()
+	love.graphics.setDefaultFilter( 'nearest', 'nearest' )
+
 	local wiz = Wizard:new()
 	table.insert(entities, wiz)
 
-	-- wiz = love.graphics.newImage("wizard.png")
 
-	-- create a new menu
-	-- add labels
-	-- each label
-
-
-	-- create a new object
-	-- the object has an image, and a number of tags
-	-- when i click anywhere
-
-	-- local doDraw = System({ '_entity', 'image' },
-    -- function (entity, image)
-	-- 	love.graphics.draw(person, character[1] - person:getWidth()/2, character[2] - person:getHeight())
-    -- end)
 end
 
 function love.draw()
-	 for i,entity in ipairs(entities) do
-	 	entity.draw()
-	 end
-
-
+	cam:draw(function(l,t,w,h)
+  		-- draw camera stuff here
+  		for _, entity in ipairs(entities) do
+    	    entity:draw()
+    	end
+	end)
 end
 
- function love.mousepressed(x, y, button)
-   if button == 1 and x>200 and x<230 and y>280 and y<320 then
-   StartGame = true
+-- function love.update(dt)
+-- 	for _, entity in ipairs(entities) do
+--         updateMotion(entity, dt)
+--     end
+-- end
+
+function love.mousepressed(x, y, button)
+	cam:setPosition(x, y)
+	Event.dispatch('mousepressed', x, y, button)
 end
