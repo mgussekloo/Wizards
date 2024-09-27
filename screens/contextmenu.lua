@@ -1,4 +1,5 @@
 local Screen = require('lib.Screen')
+local ScreenManager = require('lib.ScreenManager')
 
 local ContextMenu = {}
 
@@ -16,6 +17,19 @@ function ContextMenu.new()
 		love.graphics.rectangle('fill', x, y, w, h )
 		love.graphics.pop()
     end
+
+    function self:mousepressed(_x, _y, button)
+		if (button == 1
+			and _x >= x and _x <= x + w
+			and _y >= y and _y <= y + h
+		) then
+			print('ACK')
+			ScreenManager.switch('game')
+		end
+		-- cam:setPosition(cam:toWorld(x, y))
+		-- local x, y = cam:toWorld(x, y)
+		-- Event.dispatch('mousepressed', x, y, button)
+	end
 
     return self
 end

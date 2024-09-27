@@ -6,17 +6,20 @@ local entities = require 'lib.entities'
 
 local GameScreen = {}
 
-function GameScreen.new()
-    local self = Screen.new()
+function GameScreen:new()
+    local self = Screen:new()
 
     local x, y = 0, 0
 	local w, h = love.graphics.getDimensions()
 
 	function self:mousepressed(x, y, button)
-		print("asd")
 		-- cam:setPosition(cam:toWorld(x, y))
 		local x, y = cam:toWorld(x, y)
-		Event.dispatch('mousepressed', x, y, button)
+		-- Event.dispatch('mousepressed', x, y, button)
+
+		for _, entity in ipairs(entities) do
+    	    entity:mousepressed(x, y, button)
+    	end
 	end
 
     function self:draw()
