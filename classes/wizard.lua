@@ -35,7 +35,17 @@ function Wizard:new()
 
 	function self:touch()
 		print('YELP')
-		ScreenManager.push('contextmenu', self)
+		local options = {}
+		table.insert(options, {
+			label = 'inventory',
+			action = 'inventory',
+		})
+		table.insert(options, {
+			label = 'sneeze',
+			action = 'sneeze',
+		})
+
+		ScreenManager.push('contextmenu', self, options)
 	end
 
 	-- function self:getPosition()

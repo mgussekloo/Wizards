@@ -61,7 +61,6 @@ function GameScreen:new()
     	if drag.active then
     		local diffX = love.mouse:getX() - drag.x
     		local diffY = love.mouse:getY() - drag.y
-    		print(diffX, diffY)
     		cam:setPosition(diffX, diffY)
     	end
     end
