@@ -5,18 +5,17 @@ local Event = require 'knife.event'
 
 local ScreenManager = require('lib.ScreenManager')
 
--- local Wizard = Class('Wizard')
 
 local Wizard = {}
 
 function Wizard:new()
 	local self = {}
 
-	local image = love.graphics.newImage("wizard.png")
-	local x = 300
-	local y = 300
-	local w = 20
-	local h = 21
+	self.image = love.graphics.newImage("wizard.png")
+	self.x = 300
+	self.y = 300
+	self.w = 20
+	self.h = 21
 
 	-- Event.on('mousepressed', function (x, y, button)
 	-- 	if (button == 1
@@ -30,26 +29,18 @@ function Wizard:new()
 
 	function self:draw()
 		love.graphics.push()
-		love.graphics.draw(image, x, y)
+		love.graphics.draw(self.image, self.x, self.y)
 		love.graphics.pop()
 	end
 
-	function self:mousepressed(_x, _y, button)
-		if (button == 1
-			and _x >= x and _x <= x + w
-			and _y >= y and _y <= y + h
-		) then
-			print('YELP')
-			ScreenManager.push('contextmenu', self)
-		end
-		-- cam:setPosition(cam:toWorld(x, y))
-		-- local x, y = cam:toWorld(x, y)
-		-- Event.dispatch('mousepressed', x, y, button)
+	function self:touch()
+		print('YELP')
+		ScreenManager.push('contextmenu', self)
 	end
 
-	function self:getPosition()
-		return x, y
-	end
+	-- function self:getPosition()
+	-- 	return self.x, self.y
+	-- end
 
 	return self
 end

@@ -14,7 +14,7 @@ function ContextMenu:new(self)
 	local w, h = 300, 200
 
 	function self:init(entity)
-		local _x, _y = cam:toScreen(entity:getPosition())
+		local _x, _y = cam:toScreen(entity.x, entity.y)
 		x = _x + 50
 		y = _y
 	end

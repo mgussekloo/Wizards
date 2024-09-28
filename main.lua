@@ -22,15 +22,18 @@ function love.load()
 end
 
 function love.draw()
-	ScreenManager.draw()
+	ScreenManager:draw()
 end
 
--- function love.update(dt)
--- 	for _, entity in ipairs(entities) do
---         updateMotion(entity, dt)
---     end
--- end
+function love.update(dt)
+	ScreenManager:update(dt)
+
+end
 
 function love.mousepressed(x, y, button)
 	ScreenManager.mousepressed(x, y, button)
+end
+
+function love.mousereleased(x, y, button)
+	ScreenManager.mousereleased(x, y, button)
 end
