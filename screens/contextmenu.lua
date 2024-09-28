@@ -1,15 +1,23 @@
 local Screen = require('lib.Screen')
 local ScreenManager = require('lib.ScreenManager')
 
+local cam = require 'lib.cam'
+
 local ContextMenu = {}
 
 local hex2col = require 'lib.hex2col'
 
-function ContextMenu.new()
+function ContextMenu:new(self)
     local self = Screen.new()
 
     local x, y = 0, 0
-	local w, h = 40, 40
+	local w, h = 300, 200
+
+	function self:init(entity)
+		local _x, _y = cam:toScreen(entity:getPosition())
+		x = _x + 50
+		y = _y
+	end
 
     function self:draw()
     	love.graphics.push("all")

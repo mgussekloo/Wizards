@@ -40,11 +40,15 @@ function Wizard:new()
 			and _y >= y and _y <= y + h
 		) then
 			print('YELP')
-			ScreenManager.push('contextmenu')
+			ScreenManager.push('contextmenu', self)
 		end
 		-- cam:setPosition(cam:toWorld(x, y))
 		-- local x, y = cam:toWorld(x, y)
 		-- Event.dispatch('mousepressed', x, y, button)
+	end
+
+	function self:getPosition()
+		return x, y
 	end
 
 	return self
