@@ -7,29 +7,58 @@ local ContextMenu = {}
 
 local hex2col = require 'lib.hex2col'
 
+local Text = require 'lib.slog-text'
+
 function ContextMenu:new(self)
     local self = Screen.new()
 
-    local x, y = 0, 0
-	local w, h = 300, 200
+    self.x = 0
+    self.y = 0
+	self.w = 300
+	self.h = 200
+
+	self.options = {}
+
+	self.my_cool_textbox = Text.new("left",
+	{
+	    color = {1,1,1,1},
+	    -- shadow_color = {0.5,0.5,1,0.4},
+	    -- font = Fonts.golden_apple,
+	    -- character_sound = false,
+	    -- print_speed = 0.02,
+	    -- adjust_line_height = -3
+    })
 
 	function self:init(entity, options)
-		local _x, _y = cam:toScreen(entity.x, entity.y)
-		x = _x + 50
-		y = _y
+		local sW, sH = love.graphics.getDimensions()
+		-- local _x, _y = cam:toScreen(entity.x, entity.y)
+		self.x = (sW / 2) - (self.w / 2)
+		self.y = (sH / 2) - (self.h / 2)
+		self.options = options;
+
+		self.my_cool_textbox:send("Oh, gee, I hope this print out one by one!")
+
 	end
 
     function self:draw()
     	love.graphics.push("all")
-		love.graphics.setColor(hex2col('#FF0000'))
-		love.graphics.rectangle('fill', x, y, w, h )
+		love.graphics.setColor(hex2col('#2E2A2E'))
+		love.graphics.rectangle('fill', self.x, self.y, self.w, self.h )
+
+		self.my_cool_textbox:draw(self.x, self.y)
+
 		love.graphics.pop()
     end
 
-    function self:mousepressed(_x, _y, button)
+    function self:update(dt)
+    	print(dt)
+		self.my_cool_textbox:update(dt)
+    end
+
+    function self:mousepressed(x, y, button)
 		if (button == 1
-			and _x >= x and _x <= x + w
-			and _y >= y and _y <= y + h
+			and x >= self.x and x <= self.x + self.w
+			and y >= self.y and y <= self.y + self.h
 		) then
 			print('ACK')
 			ScreenManager.switch('game')

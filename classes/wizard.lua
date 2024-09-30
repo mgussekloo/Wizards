@@ -38,8 +38,9 @@ function Wizard:new()
 		local options = {}
 		table.insert(options, {
 			label = 'inventory',
-			action = 'inventory',
+			action = 'show_inventory',
 		})
+
 		table.insert(options, {
 			label = 'sneeze',
 			action = 'sneeze',

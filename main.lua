@@ -26,7 +26,7 @@ function love.draw()
 end
 
 function love.update(dt)
-	ScreenManager:update(dt)
+	ScreenManager.update(dt)
 
 end
 
