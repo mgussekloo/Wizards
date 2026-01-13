@@ -15,7 +15,7 @@ function ContextMenu:new(self)
     self.x = 0
     self.y = 0
 	self.w = 300
-	self.h = 200
+	self.h = 100
 
 	self.options = {}
 
@@ -32,8 +32,9 @@ function ContextMenu:new(self)
 	function self:init(entity, options)
 		local sW, sH = love.graphics.getDimensions()
 		-- local _x, _y = cam:toScreen(entity.x, entity.y)
+		self.w = sW - 40
 		self.x = (sW / 2) - (self.w / 2)
-		self.y = (sH / 2) - (self.h / 2)
+		self.y = (sH - (self.h + 20))
 		self.options = options;
 
 		self.my_cool_textbox:send("Oh, gee, I hope this print out one by one!")
